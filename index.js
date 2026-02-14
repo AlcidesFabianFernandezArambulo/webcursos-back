@@ -5,6 +5,8 @@ const mongoose = require("mongoose")
 const app = express()
 const PORT = process.env.PORT //Trae el valor de PORT de el archico .env
 
+const Course = require("./models/course")
+
 app.get('/', (req, res) =>{
     res.send('hello World!')
 })
@@ -16,6 +18,7 @@ mongoose.connect(process.env.MONGO_DB_URL, {
         }).then(()=>{
             console.log("Conexion a MongoDB exitosa")
             app.listen(PORT, () =>{
+                Course.create({name : "Creando tu propia web de cursos - desde cero"})
                 console.log(`App escuchando en puerto ${PORT}`)
             })
         })
